@@ -7,11 +7,11 @@ class Mot_Cle:
             'sinon',
             'sinonsi',
             'import',
-            'Vrai',
-            'Faux',
             'sortir',
             'definir',
-            'classe'
+            'classe',
+            'et',
+            'ou'
         ]
         self.signe = [
             '==',
