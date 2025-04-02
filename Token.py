@@ -4,9 +4,9 @@ def tokenisation(prompt):
     list_a_tokeniser = prompt
     list_tokenise = []
     cle = Mot_Cle()
-    list_shortcut = []
 
     for mot in list_a_tokeniser:
+        deci = mot.split('.')
 
         if mot in cle.mot:
             list_shortcut = [mot, 'mot cle']
@@ -26,7 +26,12 @@ def tokenisation(prompt):
                 list_shortcut = [mot, 'fonction']
                 list_tokenise.append(list_shortcut)
 
-        elif mot.find('\"') != -1 or mot.isdigit() or mot.find('deci/') != -1 or mot == 'Vrai' or mot == 'Faux':
+        elif mot[0].isupper():
+            list_shortcut = [mot, 'classe']
+            list_tokenise.append(list_shortcut)
+
+        elif (mot.find('\"') != -1 or mot.isdigit() or mot == 'Vrai' or mot == 'Faux' or len(deci) > 1
+              and deci[0].isdigit()):
 
             if mot.find('\"') != -1:
                 list_shortcut = [mot, 'chaine de carractère']
@@ -36,7 +41,7 @@ def tokenisation(prompt):
                 list_shortcut = [mot, 'entier']
                 list_tokenise.append(list_shortcut)
 
-            if mot.find('deci/') != -1:
+            if len(deci) > 1 and deci[0].isdigit():
                 list_shortcut = [mot, 'decimal']
                 list_tokenise.append(list_shortcut)
 

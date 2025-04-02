@@ -5,13 +5,15 @@ class Mot_Cle:
             'non',
             'si',
             'sinon',
-            'sinonsi',
+            'sinon',
             'import',
             'sortir',
             'definir',
             'classe',
             'et',
-            'ou'
+            'ou',
+            'répéter',
+            'tant_que'
         ]
         self.signe = [
             '==',
