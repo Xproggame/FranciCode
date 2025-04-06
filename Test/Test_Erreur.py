@@ -5,7 +5,7 @@ erreur = Erreur()
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
-        erreur.type('test = 1.0', 'entier', 'decimal')
+        erreur.type('test = 1.0')
         self.assertEqual(True, True)  # add assertion here
 
 

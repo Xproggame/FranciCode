@@ -7,7 +7,10 @@ class Erreur:
         print(f"Erreur de syntaxe: {commande}")
         self.erreur = True
 
-    def type(self, commande: str, type_variable, type_donne):
+    def type(self, commande: str):
         print(f"Erreur de type: {commande}")
-        print(f"La variable est {type_variable} et le type que vous donnez est {type_donne}")
+        self.erreur = True
+
+    def non_defini(self, commande, variable):
+        print(f"Erreur de définition: {commande}")
         self.erreur = True

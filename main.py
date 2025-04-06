@@ -1,7 +1,10 @@
 from Prompt import prompt
 from Token import tokenisation
+from Syntaxe import *
 
 while True:
     commande = prompt()
-    list_tokenise = tokenisation(commande)
-    print(list_tokenise)
+
+    if commande != []:
+        list_tokenise = tokenisation(commande)
+        syntaxe(list_tokenise, commande)

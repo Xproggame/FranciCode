@@ -1,0 +1,25 @@
+from Valeur import Valeur
+from Erreur import Erreur
+
+erreur = Erreur()
+valeur = Valeur(erreur)
+
+def syntaxe(commande_tokenise, commande):
+
+    if commande_tokenise[0][1] == 'variable':
+
+        if commande_tokenise[1][0] == '=':
+
+            if len(commande_tokenise) == 5:
+                valeur.def_variable(commande_tokenise[0][0], valeur.calcul(commande_tokenise[2], commande_tokenise[4], commande_tokenise[3][0], commande))
+
+            else:
+                commande_tokenise[2] = valeur.traitement_valeur(commande_tokenise[2])
+                valeur.def_variable(commande_tokenise[0][0], commande_tokenise[2])
+
+    if commande_tokenise[0][1] == 'fonction':
+
+        if commande_tokenise[0][0].find('afficher(') != -1:
+            text = commande_tokenise[0][0]
+            text = text[text.find('(') + 1:text.find(')')]
+            valeur.afficher(text, commande)

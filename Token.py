@@ -38,15 +38,15 @@ def tokenisation(prompt):
                 list_tokenise.append(list_shortcut)
 
             if mot.isdigit():
-                list_shortcut = [mot, 'entier']
+                list_shortcut = [int(mot), 'entier']
                 list_tokenise.append(list_shortcut)
 
             if len(deci) > 1 and deci[0].isdigit():
-                list_shortcut = [mot, 'decimal']
+                list_shortcut = [float(mot), 'decimal']
                 list_tokenise.append(list_shortcut)
 
             if mot == 'Vrai' or mot == 'Faux':
-                list_shortcut = [mot, 'binaire']
+                list_shortcut = [bool(mot), 'binaire']
                 list_tokenise.append(list_shortcut)
 
         else:
