@@ -10,10 +10,20 @@ class Valeur:
     def def_variable(self, variable, valeur):
         self.list_variable[variable] = valeur
 
-    def traitement_valeur(self, valeur):
+    def traitement_valeur(self, valeur, commande):
 
         if valeur[1] == 'chaine de carractère':
             valeur[0] = valeur[0].replace('\"', '')
+            valeur[0] = valeur[0].replace('_', ' ')
+
+        if valeur[1] == 'variable':
+
+            if self.list_variable.get(valeur[0]) is not None:
+                valeur = self.list_variable.get(valeur[0])
+
+            else:
+                self.erreur.non_defini(commande)
+
         return valeur
 
     def afficher(self, text, commande):
@@ -25,8 +35,6 @@ class Valeur:
         for element in text:
 
             if element[1] == 'chaine de carractère':
-                element[0] = element[0].replace('\"', '')
-                element[0] = element[0].replace('_', ' ')
                 text_traite += element[0]
 
             if element[1] == 'variable':
@@ -39,7 +47,6 @@ class Valeur:
                     return
 
             else:
-
                 text_traite += str(element[0])
 
         print(text_traite)
