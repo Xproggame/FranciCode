@@ -16,7 +16,7 @@ class Valeur:
             valeur[0] = valeur[0].replace('\"', '')
             valeur[0] = valeur[0].replace('_', ' ')
 
-        if valeur[1] == 'variable':
+        elif valeur[1] == 'variable':
 
             if self.list_variable.get(valeur[0]) is not None:
                 valeur = self.list_variable.get(valeur[0])
@@ -35,9 +35,11 @@ class Valeur:
         for element in text:
 
             if element[1] == 'chaine de carractère':
+                element[0] = element[0].replace('\"', '')
+                element[0] = element[0].replace('_', ' ')
                 text_traite += element[0]
 
-            if element[1] == 'variable':
+            elif element[1] == 'variable':
 
                 if self.list_variable.get(element[0]) is not None:
                     text_traite += str(self.list_variable.get(element[0])[0])

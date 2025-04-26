@@ -1,13 +1,14 @@
 from Valeur import Valeur
 from Erreur import Erreur
-from Tabulation import Tabulation
+from Tabulation import *
 
 erreur = Erreur()
 valeur = Valeur(erreur)
-tabulation = Tabulation()
+tabulation = Tabulation(valeur)
+condition = tabulation.Condition(tabulation)
 
 def syntaxe(commande_tokenise, commande):
-    tabulation.tabulation(commande_tokenise)
+    commande_tokenise = tabulation.tabulation(commande_tokenise)
 
     if commande_tokenise is not None:
 
@@ -28,3 +29,8 @@ def syntaxe(commande_tokenise, commande):
                 text = commande_tokenise[0][0]
                 text = text[text.find('(') + 1:text.find(')')]
                 valeur.afficher(text, commande)
+
+        if commande_tokenise[0][1] == 'mot cle':
+
+            if commande_tokenise[0][0] == 'si':
+                condition.si(commande_tokenise, commande)
