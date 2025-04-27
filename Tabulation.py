@@ -38,9 +38,11 @@ class Tabulation:
 
             if find_list(list_tokenise, ['ou', 'mot cle']) != -1:
 
-                while list_tokenise.index(['ou', 'mot cle']) != -1:
+                while ['ou', 'mot cle'] in list_tokenise:
                     list_condition.append(list_tokenise[:list_tokenise.index(['ou', 'mot cle'])])
                     del list_tokenise[:list_tokenise.index(['ou', 'mot cle']) + 1]
+
+                list_condition.append(list_tokenise)
 
             else:
                 list_condition.append(list_tokenise[1:])
@@ -50,7 +52,7 @@ class Tabulation:
                 superieur = find_list(condition, ['>', 'signe cle'])
                 inferieur = find_list(condition, ['<', 'signe cle'])
                 non = find_list(condition, ['non', 'mot cle'])
-                etat_condition = False
+                self.etat_condition = False
 
                 for element in range(len(condition) - 1):
                     condition[element] = self.tabulation.valeur.traitement_valeur(condition[element], commande)
@@ -60,11 +62,11 @@ class Tabulation:
                     if condition[egale - 1] == condition[egale + 1]:
 
                         if non == -1:
-                            etat_condition = True
+                            self.etat_condition = True
                             break
 
                     elif non != -1:
-                            etat_condition = True
+                            self.etat_condition = True
                             break
 
                 if superieur != -1:
@@ -72,11 +74,11 @@ class Tabulation:
                     if condition[superieur - 1] > condition[superieur + 1]:
 
                         if non == -1:
-                            etat_condition = True
+                            self.etat_condition = True
                             break
 
                     elif non != -1:
-                        etat_condition = True
+                        self.etat_condition = True
                         break
 
                 if inferieur != -1:
@@ -84,13 +86,44 @@ class Tabulation:
                     if condition[inferieur - 1] < condition[inferieur + 1]:
 
                         if non == -1:
-                            etat_condition = True
+                            self.etat_condition = True
                             break
 
                     elif non != -1:
-                        etat_condition = True
+                        self.etat_condition = True
                         break
 
-            if etat_condition:
+            if self.etat_condition:
                 self.tabulation.tabulation_valide += 1
                 print("win")
+        
+        def sinon(self, list_tokenise, commande):
+
+            if not self.etat_condition:
+                self.tabulation.tabulation_valide += 1
+
+                if len(list_tokenise) != 1:
+
+                    if list_tokenise[1][0] == 'si':
+                        self.si(list_tokenise[1:], commande)
+
+                else:
+                    self.tabulation.tabulation_valide += 1
+
+    """class Boucle:
+
+        def __init__(self, tabulation, condition):
+            self.tabulation = tabulation
+            self.condition = condition
+            self.sauvegarde = False
+            self.commandes = []
+            self.execution = False
+
+        def tant_que(self, list_tokenise, commande):
+
+            if self.commandes == []:
+                self.commandes.append(list_tokenise)
+                self.sauvegarde = True
+                return
+
+            else:"""""

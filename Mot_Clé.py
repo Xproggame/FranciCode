@@ -5,15 +5,14 @@ class Mot_Cle:
             'non',
             'si',
             'sinon',
-            'sinon',
             'import',
             'sortir',
             'definir',
             'classe',
-            'et',
             'ou',
-            'répéter',
-            'tant_que'
+            'repeter',
+            'tant_que',
+            'fin'
         ]
         self.signe = [
             '==',
@@ -23,7 +22,5 @@ class Mot_Cle:
             '/',
             '*',
             '+',
-            '-',
-            '[',
-            ']'
+            '-'
         ]
