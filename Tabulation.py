@@ -118,6 +118,7 @@ class Tabulation:
             self.sauvegarde = False
             self.commandes = []
             self.execution = False
+            self.nombre = 0
 
         def tant_que(self, list_tokenise, commande):
 
@@ -131,6 +132,24 @@ class Tabulation:
 
                 if condition:
                     self.execution = True
+
+                else:
+                    self.execution = False
+
+        def repeter(self, list_tokenise, commande):
+
+            if self.commandes == []:
+                self.commandes.append(list_tokenise)
+                self.sauvegarde = True
+                self.nombre = self.tabulation.valeur.traitement_valeur(list_tokenise[1], commande)
+                return
+
+            else:
+                self.nombre[0] -= 1
+
+                if self.nombre[0] != -1:
+                    self.execution = True
+                    self.tabulation.tabulation_valide += 1
 
                 else:
                     self.execution = False

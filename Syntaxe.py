@@ -55,6 +55,11 @@ def syntaxe(commande_tokenise, commande, tabulation: Tabulation, boucle, valeur:
                 if commande_tokenise[0][0] == 'tant_que':
                     boucle.tant_que(commande_tokenise, commande)
 
+                # repeter
+
+                if commande_tokenise[0][0] == 'repeter':
+                    boucle.repeter(commande_tokenise, commande)
+
                 # Sortir
 
                 if commande_tokenise[0][0] == 'sortir':
