@@ -2,5 +2,5 @@ def prompt():
 
     ligne = input("> ")
     ligne = ligne.replace(', ', ',')
-    ligne = ligne.replace('_', '_ ')
+    ligne = ligne.replace('>', '> ')
     return ligne.split()

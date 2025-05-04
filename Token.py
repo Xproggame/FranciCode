@@ -8,7 +8,7 @@ def tokenisation(prompt):
     for mot in list_a_tokeniser:
         deci = mot.split('.')
 
-        if mot.find('_') != -1:
+        if mot.find('>') != -1:
             list_shortcut = [mot, 'tabulation']
             list_tokenise.append(list_shortcut)
 

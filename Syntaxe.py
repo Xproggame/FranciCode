@@ -2,19 +2,15 @@ from Valeur import Valeur
 from Erreur import Erreur
 from Tabulation import *
 
-erreur = Erreur()
-valeur = Valeur(erreur)
-tabulation = Tabulation(valeur)
-condition = tabulation.Condition(tabulation)
-boucle = tabulation.Boucle(tabulation, condition)
 
-def syntaxe(commande_tokenise, commande):
-    commande_tokenise = tabulation.tabulation(commande_tokenise)
+def syntaxe(commande_tokenise, commande, tabulation: Tabulation, boucle, valeur: Valeur):
+
+    condition = tabulation.Condition(tabulation)
 
     if not boucle.sauvegarde:
+        commande_tokenise = tabulation.tabulation(commande_tokenise)
 
         if commande_tokenise is not None:
-
 
             # Variable
 
@@ -54,8 +50,15 @@ def syntaxe(commande_tokenise, commande):
                 if commande_tokenise[0][0] == 'sinon':
                     condition.sinon(commande_tokenise, commande)
 
-    elif commande_tokenise[0][0] != 'fin':
+                # tant que
+
+                if commande_tokenise[0][0] == 'tant_que':
+                    boucle.tant_que(commande_tokenise, commande)
+
+    elif ['fin', 'mot cle'] not in commande_tokenise:
         boucle.commandes.append(commande_tokenise)
 
     else:
+        boucle.commandes.append(commande_tokenise)
         boucle.sauvegarde = False
+        boucle.execution = True

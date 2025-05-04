@@ -13,10 +13,10 @@ class Tabulation:
 
         for element in list_tokenise:
 
-            if element[1] == 'tabulation':
+             if element[1] == 'tabulation':
                 tabulation += 1
 
-            else:
+             else:
                 break
 
         if tabulation <= self.tabulation_valide:
@@ -95,7 +95,7 @@ class Tabulation:
 
             if self.etat_condition:
                 self.tabulation.tabulation_valide += 1
-                print("win")
+                return True
         
         def sinon(self, list_tokenise, commande):
 
@@ -110,7 +110,7 @@ class Tabulation:
                 else:
                     self.tabulation.tabulation_valide += 1
 
-    """class Boucle:
+    class Boucle:
 
         def __init__(self, tabulation, condition):
             self.tabulation = tabulation
@@ -126,4 +126,11 @@ class Tabulation:
                 self.sauvegarde = True
                 return
 
-            else:"""""
+            else:
+                condition = self.condition.si(list_tokenise, commande)
+
+                if condition:
+                    self.execution = True
+
+                else:
+                    self.execution = False

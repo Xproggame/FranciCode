@@ -45,7 +45,7 @@ class Valeur:
                     text_traite += str(self.list_variable.get(element[0])[0])
 
                 else:
-                    self.erreur.non_defini(commande, element[0])
+                    self.erreur.non_defini(commande)
                     return
 
             else:
