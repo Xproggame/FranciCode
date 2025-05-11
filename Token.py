@@ -34,10 +34,10 @@ def tokenisation(prompt):
             list_shortcut = [mot, 'classe']
             list_tokenise.append(list_shortcut)
 
-        elif (mot.find('\"') != -1 or mot.isdigit() or mot == 'Vrai' or mot == 'Faux' or len(deci) > 1
+        elif (mot.find('\"') != -1 or mot.isdigit() or mot == 'Vrai' or mot == 'Faux' or mot[0] == '[' or len(deci) > 1
               and deci[0].isdigit()):
 
-            if mot.find('\"') != -1:
+            if mot.find('\"') != -1 and mot[0] != '[':
                 list_shortcut = [mot, 'chaine de carractère']
                 list_tokenise.append(list_shortcut)
 
@@ -52,6 +52,11 @@ def tokenisation(prompt):
             if mot == 'Vrai' or mot == 'Faux':
                 list_shortcut = [bool(mot), 'binaire']
                 list_tokenise.append(list_shortcut)
+
+            if mot[0] == '[':
+                list_shortcut = [mot, 'liste']
+                list_tokenise.append(list_shortcut)
+
 
         else:
             list_shortcut = [mot, 'variable']

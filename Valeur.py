@@ -8,7 +8,12 @@ class Valeur:
         self.erreur = erreur
 
     def def_variable(self, variable, valeur):
-        self.list_variable[variable] = valeur
+
+        if valeur[1] != 'liste':
+            self.list_variable[variable] = valeur
+
+        elif valeur[1] == 'liste':
+            self.liste(variable, valeur)
 
     def traitement_valeur(self, valeur, commande):
 
@@ -23,6 +28,10 @@ class Valeur:
 
             else:
                 self.erreur.non_defini(commande)
+
+        elif valeur[1] == 'liste':
+            valeur[0] = valeur[0][1:len(valeur[0]) - 1]
+            valeur[0] = valeur[0].split(',')
 
         return valeur
 
@@ -42,14 +51,16 @@ class Valeur:
             elif element[1] == 'variable':
 
                 if self.list_variable.get(element[0]) is not None:
-                    text_traite += str(self.list_variable.get(element[0])[0])
+
+                    if self.list_variable.get(element[0])[1] == 'liste':
+                        text_traite += str(self.list_variable.get(element[0])[0])
+
+                    else:
+                        text_traite += str(self.list_variable.get(element[0])[0])
 
                 else:
                     self.erreur.non_defini(commande)
                     return
-
-            else:
-                text_traite += str(element[0])
 
         print(text_traite)
 
@@ -88,3 +99,17 @@ class Valeur:
 
             except:
                 self.erreur.type(commande)
+
+    def element_in_list(self, liste):
+        liste_parametre = []
+
+        for parametre in liste[0]:
+            parametre_traite = tokenisation([parametre])
+            liste_parametre.append(parametre_traite[0])
+
+        return liste_parametre
+
+    def liste(self, variable, liste):
+        elements = self.element_in_list(liste)
+        self.list_variable[variable] = [elements, 'list']
+        pass

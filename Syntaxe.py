@@ -1,10 +1,12 @@
 from Valeur import Valeur
 from Erreur import Erreur
 from Tabulation import *
+from Fonction.Liste import *
 
 
 def syntaxe(commande_tokenise, commande, tabulation: Tabulation, boucle, valeur: Valeur):
 
+    liste = Liste(valeur)
     condition = tabulation.Condition(tabulation)
 
     if not boucle.sauvegarde:
@@ -35,6 +37,11 @@ def syntaxe(commande_tokenise, commande, tabulation: Tabulation, boucle, valeur:
                     text = commande_tokenise[0][0]
                     text = text[text.find('(') + 1:text.find(')')]
                     valeur.afficher(text, commande)
+
+                # Ajouter
+
+                if commande_tokenise[0][0].find('ajouter(') != -1:
+                    liste.ajouter(commande_tokenise)
 
             # Mot clé
 
