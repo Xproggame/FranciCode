@@ -1,5 +1,4 @@
 from Valeur import Valeur
-from Erreur import Erreur
 from shortcut import *
 
 class Tabulation:
@@ -125,7 +124,6 @@ class Tabulation:
             if self.commandes == []:
                 self.commandes.append(list_tokenise)
                 self.sauvegarde = True
-                return
 
             else:
                 condition = self.condition.si(list_tokenise, commande)
@@ -142,7 +140,6 @@ class Tabulation:
                 self.commandes.append(list_tokenise)
                 self.sauvegarde = True
                 self.nombre = self.tabulation.valeur.traitement_valeur(list_tokenise[1], commande)
-                return
 
             else:
                 self.nombre[0] -= 1
