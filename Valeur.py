@@ -7,6 +7,17 @@ class Valeur:
         self.list_variable = {}
         self.erreur = erreur
 
+    def parametre_primaire(self, fonction):
+        nom_variable = 0
+        parametre_brut = fonction[fonction.find('(') + 1:len(fonction) - 1]
+        parametre_brut = parametre_brut.split(',')
+
+        for parametre in parametre_brut:
+            nom_variable += 1
+            parametre_traite = tokenisation([parametre])
+            parametre_traite = self.traitement_valeur(parametre_traite[0], fonction)
+            self.def_variable(f'{fonction[:fonction.find('(')]}.{str(nom_variable)}', parametre_traite)
+
     def def_variable(self, variable, valeur):
 
         if valeur[1] != 'liste':
@@ -35,34 +46,8 @@ class Valeur:
 
         return valeur
 
-    def afficher(self, text, commande):
-        text = text
-        text = text.split('+')
-        text = tokenisation(text)
-        text_traite = ""
-
-        for element in text:
-
-            if element[1] == 'chaine de carractère':
-                element[0] = element[0].replace('\"', '')
-                element[0] = element[0].replace('_', ' ')
-                text_traite += element[0]
-
-            elif element[1] == 'variable':
-
-                if self.list_variable.get(element[0]) is not None:
-
-                    if self.list_variable.get(element[0])[1] == 'liste':
-                        text_traite += str(self.list_variable.get(element[0])[0])
-
-                    else:
-                        text_traite += str(self.list_variable.get(element[0])[0])
-
-                else:
-                    self.erreur.non_defini(commande)
-                    return
-
-        print(text_traite)
+    def afficher(self, text):
+        print(text)
 
     def calcul(self, operateur_un, operateur_deux, operateur, commande):
 
@@ -113,3 +98,10 @@ class Valeur:
         elements = self.element_in_list(liste)
         self.list_variable[variable] = [elements, 'list']
         pass
+    
+    def entre(self, list_tokenise):
+        self.parametre_primaire(list_tokenise[0][0])
+        question = self.list_variable.get('entre.1')[0]
+        retour = self.list_variable.get('entre.2')[0]
+        entre = input(question)
+        self.list_variable[retour] = [entre, 'chaine de carractère']

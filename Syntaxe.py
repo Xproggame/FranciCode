@@ -2,12 +2,13 @@ from Valeur import Valeur
 from Erreur import Erreur
 from Tabulation import *
 from Fonction.Liste import *
+from Fonction.Fonction_Primaire import *
 
 
 def syntaxe(commande_tokenise, commande, tabulation: Tabulation, boucle, valeur: Valeur):
 
-    liste = Liste(valeur)
     condition = tabulation.Condition(tabulation)
+    primaire = Primaire(valeur)
 
     if not boucle.sauvegarde:
         commande_tokenise = tabulation.tabulation(commande_tokenise)
@@ -31,17 +32,7 @@ def syntaxe(commande_tokenise, commande, tabulation: Tabulation, boucle, valeur:
 
             if commande_tokenise[0][1] == 'fonction':
 
-                # Afficher
-
-                if commande_tokenise[0][0].find('afficher(') != -1:
-                    text = commande_tokenise[0][0]
-                    text = text[text.find('(') + 1:text.find(')')]
-                    valeur.afficher(text, commande)
-
-                # Ajouter
-
-                if commande_tokenise[0][0].find('ajouter(') != -1:
-                    liste.ajouter(commande_tokenise)
+                primaire.fonction(commande_tokenise)
 
             # Mot clé
 

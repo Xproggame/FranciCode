@@ -34,6 +34,10 @@ def tokenisation(prompt):
             list_shortcut = [mot, 'classe']
             list_tokenise.append(list_shortcut)
 
+        elif mot.find('/') != -1 and len(mot) > 1:
+            list_shortcut = [mot[1:], 'retourneur']
+            list_tokenise.append(list_shortcut)
+
         elif (mot.find('\"') != -1 or mot.isdigit() or mot == 'Vrai' or mot == 'Faux' or mot[0] == '[' or len(deci) > 1
               and deci[0].isdigit()):
 
