@@ -6,6 +6,7 @@ class Valeur:
     def __init__(self, erreur: Erreur):
         self.list_variable = {}
         self.erreur = erreur
+        self.definition = False
 
     def parametre_primaire(self, fonction):
         nom_variable = 0
@@ -14,7 +15,13 @@ class Valeur:
 
         for parametre in parametre_brut:
             nom_variable += 1
-            parametre_traite = tokenisation([parametre])
+
+            if not valeur.definition:
+                parametre_traite = tokenisation([parametre])
+
+            else:
+                parametre_traite = tokenisation_fonction([parametre], fonction_def[:fonction_def.find('(')])
+
             parametre_traite = self.traitement_valeur(parametre_traite[0], fonction)
             self.def_variable(f'{fonction[:fonction.find('(')]}.{str(nom_variable)}', parametre_traite)
 
@@ -36,6 +43,10 @@ class Valeur:
 
             if self.list_variable.get(valeur[0]) is not None:
                 valeur = self.list_variable.get(valeur[0])
+
+                if valeur[1] == 'chaine de carractère':
+                    valeur[0] = valeur[0].replace('\"', '')
+                    valeur[0] = valeur[0].replace('_', ' ')
 
             else:
                 self.erreur.non_defini(commande)

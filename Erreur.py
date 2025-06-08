@@ -4,13 +4,13 @@ class Erreur:
         self.erreur = False
 
     def syntaxe(self, commande):
-        print(f"Erreur de syntaxe: {commande}")
+        print(f"\033[0;31mErreur de syntaxe: {commande}\033[0m")
         self.erreur = True
 
     def type(self, commande):
-        print(f"Erreur de type: {commande}")
+        print(f"\033[0;31mErreur de type: {commande}\033[0m")
         self.erreur = True
 
     def non_defini(self, commande):
-        print(f"Erreur de définition: {commande}")
+        print(f"\033[0;31mErreur de définition: {commande}\033[0m")
         self.erreur = True

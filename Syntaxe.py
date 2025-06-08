@@ -3,65 +3,79 @@ from Erreur import Erreur
 from Tabulation import *
 from Fonction.Liste import *
 from Fonction.Fonction_Primaire import *
+from Fonction.Definir import *
 
 
-def syntaxe(commande_tokenise, commande, tabulation: Tabulation, boucle, valeur: Valeur):
+def syntaxe(commande_tokenise, commande, tabulation: Tabulation, boucle, valeur: Valeur, definir: Definir):
 
     condition = tabulation.Condition(tabulation)
-    primaire = Primaire(valeur)
+    primaire = Primaire(valeur, definir, tabulation)
 
     if not boucle.sauvegarde:
-        commande_tokenise = tabulation.tabulation(commande_tokenise)
 
-        if commande_tokenise is not None:
+        if not definir.sauvegarde:
+            commande_tokenise = tabulation.tabulation(commande_tokenise)
 
-            # Variable
+            if commande_tokenise is not None:
 
-            if commande_tokenise[0][1] == 'variable':
+                # Variable
 
-                if commande_tokenise[1][0] == '=':
+                if commande_tokenise[0][1] == 'variable':
 
-                    if len(commande_tokenise) == 5:
-                        valeur.def_variable(commande_tokenise[0][0], valeur.calcul(commande_tokenise[2], commande_tokenise[4], commande_tokenise[3][0], commande))
+                    if commande_tokenise[1][0] == '=':
 
-                    else:
-                        commande_tokenise[2] = valeur.traitement_valeur(commande_tokenise[2], commande)
-                        valeur.def_variable(commande_tokenise[0][0], commande_tokenise[2])
+                        if len(commande_tokenise) == 5:
+                            valeur.def_variable(commande_tokenise[0][0], valeur.calcul(commande_tokenise[2], commande_tokenise[4], commande_tokenise[3][0], commande))
 
-            # Fonction
+                        else:
+                            commande_tokenise[2] = valeur.traitement_valeur(commande_tokenise[2], commande)
+                            valeur.def_variable(commande_tokenise[0][0], commande_tokenise[2])
 
-            if commande_tokenise[0][1] == 'fonction':
+                # Fonction
 
-                primaire.fonction(commande_tokenise)
+                if commande_tokenise[0][1] == 'fonction':
 
-            # Mot clé
+                    primaire.fonction(commande_tokenise)
 
-            if commande_tokenise[0][1] == 'mot cle':
+                # Mot clé
 
-                # Si
+                if commande_tokenise[0][1] == 'mot cle':
 
-                if commande_tokenise[0][0] == 'si':
-                    condition.si(commande_tokenise, commande)
+                    # Si
 
-                # Sinon
+                    if commande_tokenise[0][0] == 'si':
+                        condition.si(commande_tokenise, commande)
 
-                if commande_tokenise[0][0] == 'sinon':
-                    condition.sinon(commande_tokenise, commande)
+                    # Sinon
 
-                # tant que
+                    if commande_tokenise[0][0] == 'sinon':
+                        condition.sinon(commande_tokenise, commande)
 
-                if commande_tokenise[0][0] == 'tant_que':
-                    boucle.tant_que(commande_tokenise, commande)
+                    # tant que
 
-                # repeter
+                    if commande_tokenise[0][0] == 'tant_que':
+                        boucle.tant_que(commande_tokenise, commande)
 
-                if commande_tokenise[0][0] == 'repeter':
-                    boucle.repeter(commande_tokenise, commande)
+                    # repeter
 
-                # Sortir
+                    if commande_tokenise[0][0] == 'repeter':
+                        boucle.repeter(commande_tokenise, commande)
 
-                if commande_tokenise[0][0] == 'sortir':
-                    boucle.execution = False
+                    # Sortir
+
+                    if commande_tokenise[0][0] == 'sortir':
+                        boucle.execution = False
+
+                    # definir
+
+                    if commande_tokenise[0][0] == 'definir':
+                        definir.definir(commande_tokenise)
+
+        elif ['fin', 'mot cle'] not in commande_tokenise:
+            definir.list_fonction[definir.fonction].append(commande_tokenise)
+
+        else:
+            definir.sauvegarde = False
 
     elif ['fin', 'mot cle'] not in commande_tokenise:
         boucle.commandes.append(commande_tokenise)
