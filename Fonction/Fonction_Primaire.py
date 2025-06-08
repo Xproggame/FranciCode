@@ -4,6 +4,7 @@ from Valeur import *
 from Fonction.Parametre import *
 from Fonction.Definir import *
 from Tabulation import *
+from Fonction.Type import *
 
 class Primaire:
 
@@ -28,6 +29,18 @@ class Primaire:
 
         elif list_tokenise[0][0].find('entre(') != -1:
             self.valeur.entre(list_tokenise)
+
+        elif list_tokenise[0][0].find('chaine(') != -1:
+            nom = variable(list_tokenise[0][0])
+            chaine(nom, self.valeur)
+
+        elif list_tokenise[0][0].find('entier(') != -1:
+            nom = variable(list_tokenise[0][0])
+            entier(nom, self.valeur)
+
+        elif list_tokenise[0][0].find('decimale(') != -1:
+            nom = variable(list_tokenise[0][0])
+            decimal(nom, self.valeur)
 
         else:
 

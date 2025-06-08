@@ -24,6 +24,9 @@ def parametre(fonction, list_parametre, valeur: Valeur):
     for variable in parametre:
         valeur.def_variable(f'{fonction}.{variable}', [0, 'entier'])
 
+def variable(fonction: str):
+     return fonction[fonction.find('(') + 1:fonction.find(')')]
+
 class Recuperation:
 
     def __init__(self):
