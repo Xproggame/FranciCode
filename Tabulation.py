@@ -135,6 +135,7 @@ class Tabulation:
 
                 else:
                     self.execution = False
+                    self.commandes = []
 
         def repeter(self, list_tokenise, commande):
 
@@ -153,3 +154,4 @@ class Tabulation:
 
                 else:
                     self.execution = False
+                    self.commandes = []

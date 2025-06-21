@@ -65,6 +65,7 @@ def syntaxe(commande_tokenise, commande, tabulation: Tabulation, boucle, valeur:
 
                     if commande_tokenise[0][0] == 'sortir':
                         boucle.execution = False
+                        boucle.commandes = []
 
                     # definir
 
